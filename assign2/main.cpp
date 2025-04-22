@@ -14,7 +14,8 @@
 #include <string>
 #include <unordered_set>
 
-std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
+std::string kYourName = "Jin An"; // Don't forget to change this!
+
 
 /**
  * Takes in a file name and returns a set containing all of the applicant names as a set.
@@ -27,7 +28,17 @@ std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
  * below it) to use a `std::unordered_set` instead. If you do so, make sure
  * to also change the corresponding functions in `utils.h`.
  */
-std::set<std::string> get_applicants(std::string filename) {
+std::unordered_set<std::string> get_applicants(std::string filename) {
+  std::ifstream ifs(filename);
+  std::string name;
+  std::unordered_set<std::string> applicants;
+  if (ifs.is_open()) {
+    while (std::getline(ifs, name)) {
+      applicants.insert(name);
+    }
+  }
+  ifs.close();
+  return applicants;
   // STUDENT TODO: Implement this function.
 }
 
@@ -39,7 +50,16 @@ std::set<std::string> get_applicants(std::string filename) {
  * @param students  The set of student names.
  * @return          A queue containing pointers to each matching name.
  */
-std::queue<const std::string*> find_matches(std::string name, std::set<std::string>& students) {
+std::queue<const std::string*> find_matches(std::string name, std::unordered_set<std::string>& students) {
+  std::queue<const std::string*> ret;
+  char f = kYourName[0];
+  char l = kYourName[kYourName.find(' ') + 1];
+  for (const auto& sname : students) {
+    char F = sname[0];
+    char L = sname[sname.find(' ') + 1];
+    if (F == f && L == l) ret.push(&sname);
+  }
+  return ret;
   // STUDENT TODO: Implement this function.
 }
 
@@ -55,6 +75,14 @@ std::queue<const std::string*> find_matches(std::string name, std::set<std::stri
  */
 std::string get_match(std::queue<const std::string*>& matches) {
   // STUDENT TODO: Implement this function.
+  while (!matches.empty()) {
+    const auto& name = *(matches.front());
+    if (name[name.find(' ') + 2] == kYourName[kYourName.find(' ') + 2]) {
+      return name;
+    }
+    matches.pop();
+  }
+  return "NO MATCHES FOUND.";
 }
 
 /* #### Please don't remove this line! #### */
