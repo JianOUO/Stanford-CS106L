@@ -14,5 +14,23 @@
 #include "autograder/utils.cpp"
 
 int main() {
+  /*
+  double pi;
+  double tao;
+  std::string name;
+  std::cin >> pi >> name >> tao;
+  //std::cin >> name;
+  //std::getline(std::cin, name);
+  //std::cin >> tao;
+  std::cout << "my name is: " << name << " tao is: " << tao << " pi is: " << pi << '\n';
+  
+  std::string first;
+  std::string last;
+  std::string language, extract;  
+  std::cin >> first >> last >> language; 
+  std::getline(std::cin, extract);
+  std::cout << first << " " << last << " " << language << " " << extract << '\n';
+  return 0;
+  */
   return run_autograder();
 }
